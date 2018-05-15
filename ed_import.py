@@ -20,18 +20,18 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "hi:o:")
     except getopt.GetoptError:
-        print "ed_import.py -i <inputfile> -o <outputdir>"
+        print("ed_import.py -i <inputfile> -o <outputdir>")
         sys.exit(2)
     for opt, arg in opts:
         if opt == "-h":
-            print "ed_import.py -i <inputfile> -o <outputdir>"
+            print("ed_import.py -i <inputfile> -o <outputdir>")
             sys.exit()
         elif opt in "-i":
             input_file = arg
         elif opt in "-o":
             output_file = arg
-    print 'Input file is "', input_file
-    print 'Output file is "', output_file
+    print("Input file is {}".format(input_file))
+    print("Output file is {}".format(output_file))
 
     # Unzip the romset
     call(["unzip", "-j", "-d", tmp_dir, input_file])
@@ -39,9 +39,9 @@ def main(argv):
     # Handle individual roms
     roms = [f for f in listdir(tmp_dir) if f.endswith(".7z")]
     for rom in roms:
-        print "Processing %s" % rom
+        print("Processing {}".format(rom))
         tmp_rom_dir = join(tmp_dir, f[:-3])
-        print "Rom tmp dir %s" % tmp_rom_dir
+        print("Rom tmp dir {}".format(tmp_rom_dir))
         call(["7z", "-o%s" % tmp_rom_dir, "x", join(tmp_dir, rom)])
         versions = listdir(tmp_rom_dir)
         for version in versions:
